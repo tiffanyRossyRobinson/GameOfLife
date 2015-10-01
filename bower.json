@@ -1,0 +1,22 @@
+{
+  "name": "GameOfLife",
+  "version": "0.0.0",
+  "description": "This is the game of life project",
+  "main": "index.html",
+  "moduleType": [],
+  "authors": [
+    "Tiffany Robinson"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-route": "~1.4.7"
+  }
+}
