@@ -4,7 +4,7 @@
     .module('myLife')
     .controller('gameControl', function($scope, $routeParams, $location, $rootScope, $parse, $interval){
 
-      $scope.value = true;
+      $scope.value = true
 
         $scope.create= function(input){
           // console.log("game: ", input);
@@ -48,6 +48,17 @@
           $scope.value = false;
         }
 
+        //this allows the user to clear all cells
+        $scope.clearAll= function(someObject){
+          for(var x = 0; x < someObject.classes.length; x++){
+            var thisClass = someObject.classes[x];
+
+            var model = $parse(thisClass);
+            model.assign($scope, false); 
+          }  
+        }
+
+
         //This will occur when a button is clicked 
         $scope.alert=function(location){
           var thisClass= "isActive" + location;
@@ -61,6 +72,7 @@
           model.assign($scope, currentValue); 
 
        }
+
        $scope.stop = function(someObject){
         if($scope.promise != undefined){
           alert("You can't handle the truth!");

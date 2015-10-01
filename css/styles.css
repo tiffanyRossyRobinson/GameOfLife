@@ -34,23 +34,27 @@ a{
 	font-size: 20px;
 }
 
-.selectButton{
-	display:block;
-	width: 25%;
-	margin-left:auto;
-	margin-right:auto;
-	height: 10%;
-	margin-bottom: 3%;
-	border-radius: 5%;
-	color: green;
-	font-size: 15px;
+.pageTitle h4{
+	margin-bottom: 2%;
+}
+
+input{
+	margin-bottom: 2%;
+	width: 4%;
+	padding: 4px;
+}
+
+.clearButton{
+	margin-bottom: 1%;
+	padding:6px;
 }
 
 form{
 	text-align: center;
 }
 
-.startButton{
+.startButton, .runButton, .stopButton{
+	padding:6px;
 	display:inline;
 }
 

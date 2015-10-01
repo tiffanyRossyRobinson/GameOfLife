@@ -7,13 +7,18 @@
        <label for="rows">Rows: </label>
        <input type="number" min="1" max="10"  required="number" ng-model= "game.length" placeholder="##"/>
        <label for="iterations">Colums: </label>
-       <input type="number" min="1" max="20"  required="number" ng-model= "game.width" placeholder="##"/>
+       <input type="number" min="1" max="20"  required="number" ng-model= "game.width" placeholder="##"/> </br>
        <button type="submit" class="startButton" ng-click="create(game)">Create</button>
        <button type="submit" class="runButton" ng-class="{'hide': value}" ng-click="start(game)">Start</button>
        <button type="submit" class="stopButton" ng-class="{'hide': value}" ng-click="stop(game)">Stop</button>
    </form>
 
-   	<h4 class="pageTitle">Bring Cells To Life:</h4>
+    <div class="pageTitle" ng-class="{'hide': value}">
+       <h4 >Bring Cells To Life:</h4>
+      <button class="clearButton"  ng-click="clearAll(game)">Kill All Cells</button>
+    </div>
+   	
+    
 
 <div class="table">
 	 <table align="center">
