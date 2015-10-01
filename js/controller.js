@@ -7,7 +7,7 @@
       $scope.value = true;
 
         $scope.create= function(input){
-          console.log("game: ", input);
+          // console.log("game: ", input);
           $rootScope.game = input;
 
         //This creates the array of the number of rows
@@ -63,15 +63,14 @@
        }
 
        $scope.start = function(someObject){
-        console.log("object: ", someObject);
+        // console.log("object: ", someObject);
           // $interval( function(){
             var array = someObject.classes;
             // for(var j = 0; j < someObject.iterations; j++){
+              // console.log("this is iteration number: ", j);
             $interval(function(){
-                // console.log("this is iteration number: ", j);
-                
                 var needToUpdate = [];
-                console.log("this is need to update: ", needToUpdate);
+                // console.log("this is need to update: ", needToUpdate);
                 for(var i = 0; i < array.length; i++){
                   var thisClass = array[i];
                   var elements = thisClass.split("");
@@ -114,16 +113,16 @@
 
                   if($scope[thisClass] === true){
                     if(aliveNeighbors < 2){
-                      console.log("this is what is ALIVE: ", thisClass);
-                      console.log("this cell needs to be DEAD"); 
+                      // console.log("this is what is ALIVE: ", thisClass);
+                      // console.log("this cell needs to be DEAD"); 
                       needToUpdate.push(thisClass); 
                     }
                     else if( aliveNeighbors === 2 || aliveNeighbors === 2){
-                      console.log("this cell needs to stay alive"); 
+                      // console.log("this cell needs to stay alive"); 
                     }
                     else if( aliveNeighbors > 3){
-                      console.log("this is what is ALIVE: ", thisClass);
-                      console.log("this cell needs to be DEAD"); 
+                      // console.log("this is what is ALIVE: ", thisClass);
+                      // console.log("this cell needs to be DEAD"); 
                       needToUpdate.push(thisClass); 
                     }
 
@@ -131,8 +130,8 @@
 
                   if($scope[thisClass] === false){ //if the cell is dead
                     if(aliveNeighbors === 3){
-                      console.log("this is what is dead: ", thisClass);
-                      console.log("this needs to become ALIVE");
+                      // console.log("this is what is dead: ", thisClass);
+                      // console.log("this needs to become ALIVE");
                       needToUpdate.push(thisClass);
                     }
                   }
@@ -140,7 +139,7 @@
                 }
 
                 for(var x = 0; x < needToUpdate.length; x++){
-                  console.log("changing the cells: ", needToUpdate[x]);
+                  // console.log("changing the cells: ", needToUpdate[x]);
                   var thisClass = needToUpdate[x];
                   var currentValue = $scope[thisClass];
 
