@@ -61,6 +61,12 @@
           model.assign($scope, currentValue); 
 
        }
+       $scope.stop = function(someObject){
+        if($scope.promise != undefined){
+          alert("You can't handle the truth!");
+          $interval.cancel($scope.promise);
+        }
+       }
 
        $scope.start = function(someObject){
         // console.log("object: ", someObject);
@@ -68,7 +74,8 @@
             var array = someObject.classes;
             // for(var j = 0; j < someObject.iterations; j++){
               // console.log("this is iteration number: ", j);
-            $interval(function(){
+
+            $scope.promise = $interval(function(){
                 var needToUpdate = [];
                 // console.log("this is need to update: ", needToUpdate);
                 for(var i = 0; i < array.length; i++){
@@ -136,6 +143,11 @@
                     }
                   }
 
+                }
+
+                if(needToUpdate.length === 0){
+                  alert("You have reached the end of your journey!");
+                  $interval.cancel($scope.promise);
                 }
 
                 for(var x = 0; x < needToUpdate.length; x++){
