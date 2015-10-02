@@ -4,7 +4,7 @@
     .module('myLife')
     .controller('gameControl', function($scope, $routeParams, $location, $rootScope, $parse, $interval){
 
-      $scope.value = true
+        $scope.value = true
 
         $scope.create= function(input){
           $scope.value = false;
@@ -37,57 +37,58 @@
           });  
         };
 
-        //This will occur when a button is clicked 
+        //This will occur when a cell button is clicked 
         $scope.alert=function(location){
           var thisClass= "isActive" + location;
           var model = $parse(thisClass);
           model.assign($scope, !($scope[thisClass])); 
         };
 
-       $scope.stop = function(someObject){
+        //This will stop the running cycle
+        $scope.stop = function(someObject){
           alert("You can't handle the truth!");
           $interval.cancel($scope.promise);
-       }
+        }
 
-       $scope.start = function(someObject){
-            var array = someObject.classes;
+        //This will run the game 
+        $scope.start = function(someObject){
+          var array = someObject.classes;
+          $scope.promise = $interval(function(){
+              var needToUpdate = [];
+              _.each(array, function(data){
+                  var thisClass = data;
+                  var row = Number(thisClass[8]);
+                  var col = thisClass[9];
 
-            $scope.promise = $interval(function(){
-                var needToUpdate = [];
-                _.each(array, function(data){
-                    var thisClass = data;
-                    var row = Number(thisClass[8]);
-                    var col = thisClass[9];
+                  var aliveNeighbors = _.filter([
+                      ("isActive" + (row-1) + col), 
+                      ("isActive" + (row + 1) + col), 
+                      ("isActive" + (row - 1) + String.fromCharCode(col.charCodeAt(0) - 1)), 
+                      ("isActive" + (row - 1) + String.fromCharCode(col.charCodeAt(0) + 1)),
+                      ("isActive" + row + String.fromCharCode(col.charCodeAt(0) - 1)),
+                      ("isActive" + row + String.fromCharCode(col.charCodeAt(0) + 1)),
+                      ("isActive" + (row + 1) + String.fromCharCode(col.charCodeAt(0) - 1)),
+                      ("isActive" + (row + 1) + String.fromCharCode(col.charCodeAt(0) + 1))
+                      ], function(data){
+                      return $scope[data] === true; 
+                  })
 
-                    var aliveNeighbors = _.filter([
-                        ("isActive" + (row-1) + col), 
-                        ("isActive" + (row + 1) + col), 
-                        ("isActive" + (row - 1) + String.fromCharCode(col.charCodeAt(0) - 1)), 
-                        ("isActive" + (row - 1) + String.fromCharCode(col.charCodeAt(0) + 1)),
-                        ("isActive" + row + String.fromCharCode(col.charCodeAt(0) - 1)),
-                        ("isActive" + row + String.fromCharCode(col.charCodeAt(0) + 1)),
-                        ("isActive" + (row + 1) + String.fromCharCode(col.charCodeAt(0) - 1)),
-                        ("isActive" + (row + 1) + String.fromCharCode(col.charCodeAt(0) + 1))
-                        ], function(data){
-                        return $scope[data] === true; 
-                    })
+                 var singleArray = [];
+                 singleArray.push(thisClass);
 
-                   var singleArray = [];
-                   singleArray.push(thisClass);
+                 needToUpdate.push(_.filter(singleArray, function(data){
+                   return ($scope[data] === true && (aliveNeighbors.length < 2 || aliveNeighbors.length > 2)) || ($scope[data] === false && aliveNeighbors.length === 3);
+                 }).join())
 
-                   needToUpdate.push(_.filter(singleArray, function(data){
-                     return ($scope[data] === true && (aliveNeighbors.length < 2 || aliveNeighbors.length > 2)) || ($scope[data] === false && aliveNeighbors.length === 3);
-                   }).join())
-
-                   needToUpdate = _.without(needToUpdate, "");
-                 });
-                
-                needToUpdate.length === 0 ? (alert("You have reached the end of your journey!"), $interval.cancel($scope.promise)) : 
-                    _.each(needToUpdate, function(data){
-                      var model = $parse(data);
-                      model.assign($scope, !($scope[data])); 
-                    });
-            }, 500, someObject.iterations);
-       }
+                 needToUpdate = _.without(needToUpdate, "");
+              });
+              
+              needToUpdate.length === 0 ? (alert("You have reached the end of your journey!"), $interval.cancel($scope.promise)) : 
+                  _.each(needToUpdate, function(data){
+                    var model = $parse(data);
+                    model.assign($scope, !($scope[data])); 
+                  });
+          }, 500, someObject.iterations);
+        }
     });
 })();
