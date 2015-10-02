@@ -7,36 +7,26 @@
       $scope.value = true
 
         $scope.create= function(input){
-          // console.log("game: ", input);
-          $rootScope.game = input;
-
+          $scope.value = false;
           //This creates the array of the number of rows
-          $scope.length= [];
-          $scope.length = _.range(input.length);
+          $scope.game.rows= [];
+          $scope.game.rows = _.range(input.length);
 
           //This creates the array of the number of columns
           $scope.game.classes = [];
-          $scope.width= [];
-
-          var l="A";
+          $scope.game.columns= [];
+          var l= "A";
 
           _.times(input.width, function(){
-            $scope.width.push(l);
-            var j = 0; 
-            _.times($scope.length.length, function(){
-                var thisClass= 'isActive' + $scope.length[j] + l;
+            $scope.game.columns.push(l);
+            _.times($scope.game.rows.length, function(i){
+                var thisClass= 'isActive' + $scope.game.rows[i] + l;
                 $scope.game.classes.push(thisClass);
                 var model = $parse(thisClass);
                 model.assign($scope, false);
-                j += 1;
             });
             l = String.fromCharCode(l.charCodeAt(0) + 1);
           });
-
-          //This sets the scope values for the rows and columns for the table
-          $scope.game.rows = $scope.length;
-          $scope.game.columns = $scope.width;
-          $scope.value = false;
         };
 
         //this allows the user to clear all cells
@@ -66,9 +56,8 @@
                 var needToUpdate = [];
                 _.each(array, function(data){
                     var thisClass = data;
-                    var elements = thisClass.split("");
-                    var row = Number(elements[8]);
-                    var col = elements[9];
+                    var row = Number(thisClass[8]);
+                    var col = thisClass[9];
 
                     var aliveNeighbors = _.filter([
                         ("isActive" + (row-1) + col), 
@@ -100,6 +89,5 @@
                     });
             }, 500, someObject.iterations);
        }
-
     });
 })();
