@@ -39,5 +39,7 @@ Contributions are always welcome!
 The app is organized in the following directories
 - views: html file for the app view (main.html)
 - css: All css styling is in styles.css
-- js: js files for module and controller(where the game logic is located) 
+- js: js files for the presentation
+- gameBoard: this folder has the logic for generating the board 
+- gameRun: this folder has the logic where game will execute and run rules. 
 
