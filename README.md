@@ -30,7 +30,6 @@ you can now find the game at http://localhost:3000/
 
 - AngularJS
 - npm serve
-- Underscore.JS (on Secondary branch only)
 
 ## Contribute 
 
