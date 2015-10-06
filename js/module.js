@@ -2,7 +2,9 @@
   'use strict';
   angular
     .module('myLife', [
-      'ngRoute'
+      'ngRoute', 
+      'board',
+      'run'
       ])
     .config(function($routeProvider){
       $routeProvider

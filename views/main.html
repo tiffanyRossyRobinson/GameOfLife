@@ -23,7 +23,7 @@
 <div class="table">
 	 <table align="center">
   		<tr ng-repeat="row in game.rows">
-    		<td ng-repeat="col in game.columns"><button ng-class="{'Alive': isActive{{row+col}}}" ng-click="alert(row+col)"></button></td>
+    		<td ng-repeat="col in game.columns"><button ng-class="{'Alive': isActive{{row+col}}}" ng-click="selectCell(row+col)"></button></td>
  		</tr>
 	</table>
 </div>
