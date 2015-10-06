@@ -82,6 +82,9 @@ tr{
 
 .Alive{
 	background-color: red;
+	background: url(thriller.jpg);
+    background-size: 40px 40px;
+    background-repeat: no-repeat;
 }
 
 .hide{
