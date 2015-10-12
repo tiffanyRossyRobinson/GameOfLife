@@ -8,7 +8,7 @@
         //this allows the user to create a table
         $scope.create= function(input){
           $scope.value = false;
-          boardService.createTable(input).then(function(resp){
+          $scope.game = boardService.createTable(input).then(function(resp){
               $scope.game = resp;
               setCellsToFalse(resp);
           })

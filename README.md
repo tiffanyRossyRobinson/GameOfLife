@@ -1,4 +1,4 @@
-# This is the Game of Life!
+# This is the Game of zLife!
 
 This game is my running version on Conways Game of Life. In this version, the user gets to pick what size of life space they want (rows[max=10] X col[max=20]), the number of interations, and which cells they want to start as ALIVE. 
 
